@@ -31,52 +31,54 @@ namespace Eq2Grau.Controllers{
              *    senão, notificar o utlizador de como corrigir
              */
 
-            //2.1 (esta comentado porque as {} estavam a dar erro, corrigir dps
-            //íf (!float.TryParse(A, out float a)) {
-            //    //A não é número
-            //    //falta ainda gerar a msg de erro,
-            //    //para ajudar o atulizador a corrigir o problema
-            //    return View();
-            //}
-            //íf(!float.TryParse(B, out float b)){
-            //    //B não é número
-            //    //falta ainda gerar a msg de erro,
-            //    //para ajudar o atulizador a corrigir o problema
-            //    return View();
-            //}
-            //íf(!float.TryParse(C, out float c)){
-            //    //C não é número
-            //    //falta ainda gerar a msg de erro,
-            //    //para ajudar o atulizador a corrigir o problema
-            //    return View();
-            //}
+            //2.1 
+            if (!float.TryParse(A, out float a)) {
+                //A não é número
+                ModelState.AddModelError("A", "O valor introduzido deve ser um número.");
+                return View();
+            }
+            if(!float.TryParse(B, out float b)){
+                //B não é número
+                ModelState.AddModelError("B", "O valor introduzido deve ser um número.");
+                return View();
+            }
+            if(!float.TryParse(C, out float c)){
+                //C não é número
+                ModelState.AddModelError("C", "O valor introduzido deve ser um número.");
+                return View();
+            }
 
-
-            float.TryParse(A, out float a);
-            float.TryParse(B, out float b);
-            float.TryParse(C, out float c);
-
-            //falta avaliar se A é zero
+            //2.2
+            if(a == 0){
+                ModelState.AddModelError("A", "O valor introduzido deve ser diferente de 0.");
+                return View();
+            }
 
             //3.1
-            float delta = (b * b )- (4 * a * c);
+            float delta = (b * b) - (4 * a * c);
 
             //3.2
-            if (delta >= 0) {
+            if (delta >= 0)
+            {
                 //3.2.1
-                float x1 = ( -b + MathF.Sqrt(delta) )/(2 * a);
+                float x1 = (-b + MathF.Sqrt(delta)) / (2 * a);
                 float x2 = (-b - MathF.Sqrt(delta)) / (2 * a);
-                
+
                 //3.4
                 ViewBag.X1 = x1;
                 ViewBag.X2 = x2;
+            }else{
+                //3.3
+                //3.3.1
+
+                float parteReal = -b / (2 * a);
+                float parteImag = MathF.Sqrt(-delta)/(2*a);
+
+                //3.4
+                ViewBag.X1 = $"{parteReal} +{ parteImag}i";
+                ViewBag.X2 = $"{parteReal} - {parteImag}i";
 
             }
-
-
-
-
-
 
             return View();
         }

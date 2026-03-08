@@ -4,26 +4,33 @@
 
 <div class="text-center">
     <h1 class="display-4">Equação de 2º Grau</h1>
-    <img src="https://www.casadasciencias.org/storage/app/uploads/public/5e0/df9/6ae/5e0df96ae8108558117106.png?contador=1" 
+    <img src="https://www.casadasciencias.org/storage/app/uploads/public/5e0/df9/6ae/5e0df96ae8108558117106.png?contador=1"
          alt="imagem com a fórmula resolvente"
-         width="200"
-    />
-
+         width="200" />
 </div>
-@*id: identifica a "textbox" no Cliente / name: identifica a "textbox" no Servidor*@
-<form>
+
+<form method="GET">
+    @Html.ValidationSummary()
+
     <p>Parâmetros da equação de 2º Grau:</p>
     <p>
-        A: <input type="text" name="A"/></br>
-        B: <input type="text" name="B"/></br>
-        C: <input type="text" name="C"/></br>
+        A: <input type="text" name="A" /><br />
+        @Html.ValidationMessage("A")
+        <br />
+
+        B: <input type="text" name="B" /><br />
+        @Html.ValidationMessage("B")
+        <br />
+
+        C: <input type="text" name="C" /><br />
+        @Html.ValidationMessage("C")
+        <br />
     </p>
-    <input type="submit" value="Calcular"/>
+
+    <input type="submit" value="Calcular" />
 </form>
 
-@*Resposta do crontoler*@
-
 <div>
-    <p>X1=@ViewBag.X1 <br/></p>
-    <p>X2=@ViewBag.X2 <br/></p>
+    <p>X1 = @ViewBag.X1</p>
+    <p>X2 = @ViewBag.X2</p>
 </div>
